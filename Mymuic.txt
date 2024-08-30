@@ -1,0 +1,1398 @@
+Hello 
+Please find code below 
+
+
+
+Album.java
+
+--------
+
+package com.Music.Entity;
+
+
+
+import jakarta.persistence.Entity;
+
+import jakarta.persistence.GeneratedValue;
+
+import jakarta.persistence.GenerationType;
+
+import jakarta.persistence.Id;
+
+import jakarta.persistence.JoinColumn;
+
+import jakarta.persistence.ManyToOne;
+
+
+
+@Entity
+
+public class Album {
+
+
+
+                @Id
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Long id;
+
+
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+                private Long album_id;
+
+
+
+    private String title;
+
+
+
+    private String artist;
+
+
+
+    @ManyToOne
+
+    @JoinColumn(name = "song_id")
+
+    private Song song;
+
+
+
+                public Long getId() {
+
+                                return id;
+
+                }
+
+
+
+                public void setId(Long id) {
+
+                                this.id = id;
+
+                }
+
+
+
+                public Long getAlbum_id() {
+
+                                return album_id;
+
+                }
+
+
+
+                public void setAlbum_id(Long album_id) {
+
+                                this.album_id = album_id;
+
+                }
+
+
+
+                public String getTitle() {
+
+                                return title;
+
+                }
+
+
+
+                public void setTitle(String title) {
+
+                                this.title = title;
+
+                }
+
+
+
+                public String getArtist() {
+
+                                return artist;
+
+                }
+
+
+
+                public void setArtist(String artist) {
+
+                                this.artist = artist;
+
+                }
+
+
+
+                public Song getSong() {
+
+                                return song;
+
+                }
+
+
+
+                public void setSong(Song song) {
+
+                                this.song = song;
+
+                }
+
+
+
+                public Album(Long id, Long album_id, String title, String artist, Song song) {
+
+                                super();
+
+                                this.id = id;
+
+                                this.album_id = album_id;
+
+                                this.title = title;
+
+                                this.artist = artist;
+
+                                this.song = song;
+
+                }
+
+                public Album() {
+
+
+
+                                }
+
+
+
+                @Override
+
+                public String toString() {
+
+                                return "Album [id=" + id + ", album_id=" + album_id + ", title=" + title + ", artist=" + artist + ", song="
+
+                                                                + song + "]";
+
+                }
+
+
+
+
+
+
+
+}
+
+
+
+Playlist.java
+
+--------
+
+package com.Music.Entity;
+
+
+
+import jakarta.persistence.Entity;
+
+import jakarta.persistence.GeneratedValue;
+
+import jakarta.persistence.GenerationType;
+
+import jakarta.persistence.Id;
+
+import jakarta.persistence.JoinColumn;
+
+import jakarta.persistence.ManyToOne;
+
+
+
+@Entity
+
+public class Playlist {
+
+
+
+                @Id
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Long id;
+
+                @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+                private long plList_id;
+
+                private String artist;
+
+                @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+                private int num_of_songs_of_Artist;
+
+
+
+    @ManyToOne
+
+    @JoinColumn(name = "song_id")
+
+    private Song song;
+
+
+
+                public Long getId() {
+
+                                return id;
+
+                }
+
+
+
+                public void setId(Long id) {
+
+                                this.id = id;
+
+                }
+
+
+
+                public long getPlList_id() {
+
+                                return plList_id;
+
+                }
+
+
+
+                public void setPlList_id(long plList_id) {
+
+                                this.plList_id = plList_id;
+
+                }
+
+
+
+                public String getArtist() {
+
+                                return artist;
+
+                }
+
+
+
+                public void setArtist(String artist) {
+
+                                this.artist = artist;
+
+                }
+
+
+
+                public int getNum_of_songs_of_Artist() {
+
+                                return num_of_songs_of_Artist;
+
+                }
+
+
+
+                public void setNum_of_songs_of_Artist(int num_of_songs_of_Artist) {
+
+                                this.num_of_songs_of_Artist = num_of_songs_of_Artist;
+
+                }
+
+
+
+                public Song getSong() {
+
+                                return song;
+
+                }
+
+
+
+                public void setSong(Song song) {
+
+                                this.song = song;
+
+                }
+
+
+
+                @Override
+
+                public String toString() {
+
+                                return "Playlist [id=" + id + ", plList_id=" + plList_id + ", artist=" + artist + ", num_of_songs_of_Artist="
+
+                                                                + num_of_songs_of_Artist + ", song=" + song + "]";
+
+                }
+
+
+
+                public Playlist(Long id, long plList_id, String artist, int num_of_songs_of_Artist, Song song) {
+
+                                super();
+
+                                this.id = id;
+
+                                this.plList_id = plList_id;
+
+                                this.artist = artist;
+
+                                this.num_of_songs_of_Artist = num_of_songs_of_Artist;
+
+                                this.song = song;
+
+                }
+
+
+
+                public Playlist() {
+
+                                super();
+
+                                // TODO Auto-generated constructor stub
+
+                }
+
+
+
+
+
+
+
+}
+
+
+
+
+
+Song.java
+
+-----
+
+package com.Music.Entity;
+
+
+
+import java.util.Set;
+
+
+
+import jakarta.persistence.Entity;
+
+import jakarta.persistence.GeneratedValue;
+
+import jakarta.persistence.GenerationType;
+
+import jakarta.persistence.Id;
+
+import jakarta.persistence.OneToMany;
+
+
+
+@Entity
+
+public class Song {
+
+
+
+                    @Id
+
+                    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+                    private Long id;
+
+                    private String title;
+
+                    private String artist;
+
+
+
+                    @OneToMany(mappedBy = "song")
+
+
+
+                    private Set<Album> albums;
+
+
+
+                    public Long getId() {
+
+                                                return id;
+
+                                }
+
+
+
+                                public void setId(Long id) {
+
+                                                this.id = id;
+
+                                }
+
+
+
+                                public String gettitle() {
+
+                                                return title;
+
+                                }
+
+
+
+                                public void settitle(String title) {
+
+                                                this.title = title;
+
+                                }
+
+
+
+                                public String getartist() {
+
+                                                return artist;
+
+                                }
+
+
+
+                                public void setartist(String artist) {
+
+                                                this.artist = artist;
+
+                                }
+
+
+
+
+
+
+
+                    public Song() {
+
+
+
+                                }
+
+
+
+                                public Song(Long id, String title, String artist) {
+
+                                                super();
+
+                                                this.id = id;
+
+                                                this.title = title;
+
+                                                this.artist = artist;
+
+                                }
+
+
+
+
+
+
+
+
+
+                    // Constructors, getters, setters, and other fields as needed
+
+
+
+                    // Constructors, getters, setters, and other methods can be added here
+
+                }
+
+
+
+
+
+Albumcontroller.java
+
+------------------
+
+package com.Music.Controller;
+
+
+
+import java.util.List;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpStatus;
+
+import org.springframework.http.ResponseEntity;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.PathVariable;
+
+import org.springframework.web.bind.annotation.PostMapping;
+
+import org.springframework.web.bind.annotation.PutMapping;
+
+import org.springframework.web.bind.annotation.RequestBody;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.RestController;
+
+
+
+import com.Music.Entity.Album;
+
+import com.Music.Service.AlbumService;
+
+
+
+@RestController
+
+@RequestMapping("/album")
+
+public class AlbumController {
+
+
+
+    @Autowired
+
+    private AlbumService albumService;
+
+
+
+    @GetMapping
+
+    public List<Album> getAllAlbums() {
+
+        return albumService.getAllAlbums();
+
+    }
+
+
+
+    @GetMapping("/{id}")
+
+    public ResponseEntity<Album> getAlbumById(@PathVariable Long id) {
+
+        Album album = albumService.getAlbumById(id);
+
+        if (album != null) {
+
+            return ResponseEntity.ok(album);
+
+        } else {
+
+            return ResponseEntity.notFound().build();
+
+        }
+
+    }
+
+
+
+    @PostMapping
+
+    public ResponseEntity<Album> createAlbum(@RequestBody Album album) {
+
+        Album createdAlbum = albumService.createAlbum(album);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdAlbum);
+
+    }
+
+
+
+    @PutMapping("/{id}")
+
+    public ResponseEntity<Album> updateAlbum(@PathVariable Long id, @RequestBody Album album) {
+
+        Album updatedAlbum = albumService.updateAlbum(id, album);
+
+        if (updatedAlbum != null) {
+
+            return ResponseEntity.ok(updatedAlbum);
+
+        } else {
+
+            return ResponseEntity.notFound().build();
+
+        }
+
+    }
+
+
+
+    @DeleteMapping("/{id}")
+
+    public ResponseEntity<Void> deleteAlbum(@PathVariable Long id) {
+
+        boolean deleted = albumService.deleteAlbum(id);
+
+        if (deleted) {
+
+            return ResponseEntity.noContent().build();
+
+        } else {
+
+            return ResponseEntity.notFound().build();
+
+        }
+
+    }
+
+}
+
+
+
+Playlistcontroller.java
+
+---------------------
+
+
+
+package com.Music.Controller;
+
+
+
+import java.util.List;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpStatus;
+
+import org.springframework.http.ResponseEntity;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.PathVariable;
+
+import org.springframework.web.bind.annotation.PostMapping;
+
+import org.springframework.web.bind.annotation.PutMapping;
+
+import org.springframework.web.bind.annotation.RequestBody;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.RestController;
+
+
+
+import com.Music.Entity.Playlist;
+
+import com.Music.Service.PlaylistService;
+
+
+
+@RestController
+
+@RequestMapping("/playlist")
+
+public class PlaylistController {
+
+
+
+    @Autowired
+
+    private PlaylistService playlistService;
+
+
+
+    @GetMapping
+
+    public List<Playlist> getAllPlaylists() {
+
+        return playlistService.getAllPlaylists();
+
+    }
+
+
+
+    @GetMapping("/{id}")
+
+    public ResponseEntity<Playlist> getPlaylistById(@PathVariable Long id) {
+
+        Playlist playlist = playlistService.getPlaylistById(id);
+
+        if (playlist != null) {
+
+            return ResponseEntity.ok(playlist);
+
+        } else {
+
+            return ResponseEntity.notFound().build();
+
+        }
+
+    }
+
+
+
+    @PostMapping
+
+    public ResponseEntity<Playlist> createPlaylist(@RequestBody Playlist playlist) {
+
+        Playlist createdPlaylist = playlistService.createPlaylist(playlist);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdPlaylist);
+
+    }
+
+
+
+    @PutMapping("/{id}")
+
+    public ResponseEntity<Playlist> updatePlaylist(@PathVariable Long id, @RequestBody Playlist playlist) {
+
+        Playlist updatedPlaylist = playlistService.updatePlaylist(id, playlist);
+
+        if (updatedPlaylist!= null) {
+
+            return ResponseEntity.ok(updatedPlaylist);
+
+        } else {
+
+            return ResponseEntity.notFound().build();
+
+        }
+
+    }
+
+
+
+    @DeleteMapping("/{id}")
+
+    public String deletePlaylist(@PathVariable Long id) {
+
+        boolean deleted = playlistService.deletePlaylist(id);
+
+        if (deleted) {
+
+               ResponseEntity.noContent().build();
+
+            return "Deleted";
+
+        } else {
+
+                ResponseEntity.notFound().build();
+
+            return "Invalid Id";
+
+        }
+
+    }
+
+}
+
+
+
+Songcontroller.java
+
+--------------------
+
+package com.Music.Controller;
+
+
+
+import java.util.List;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpStatus;
+
+import org.springframework.http.ResponseEntity;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.PathVariable;
+
+import org.springframework.web.bind.annotation.PostMapping;
+
+import org.springframework.web.bind.annotation.PutMapping;
+
+import org.springframework.web.bind.annotation.RequestBody;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.RestController;
+
+
+
+import com.Music.Entity.Song;
+
+import com.Music.Service.SongService;
+
+
+
+@RestController
+
+@RequestMapping("/song")
+
+public class SongController {
+
+
+
+    @Autowired
+
+    private SongService songService;
+
+
+
+    @GetMapping
+
+    public List<Song> getAllSongs() {
+
+        return songService.getAllSongs();
+
+    }
+
+
+
+    @GetMapping("/{id}")
+
+    public ResponseEntity<Song> getSongById(@PathVariable Long id) {
+
+        Song song = songService.getSongById(id);
+
+        if (song != null) {
+
+            return ResponseEntity.ok(song);
+
+        } else {
+
+            return ResponseEntity.notFound().build();
+
+        }
+
+    }
+
+
+
+    @PostMapping
+
+    public ResponseEntity<Song> createSong(@RequestBody Song song) {
+
+        Song createdSong = songService.createSong(song);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdSong);
+
+    }
+
+
+
+    @PutMapping("/{id}")
+
+    public ResponseEntity<Song> updateSong(@PathVariable Long id, @RequestBody Song song) {
+
+        Song updatedSong = songService.updateSong(id, song);
+
+        if (updatedSong != null) {
+
+            return ResponseEntity.ok(updatedSong);
+
+        } else {
+
+            return ResponseEntity.notFound().build();
+
+        }
+
+    }
+
+
+
+    @DeleteMapping("/{id}")
+
+    public ResponseEntity<Void> deleteSong(@PathVariable Long id) {
+
+        boolean deleted = songService.deleteSong(id);
+
+        if (deleted) {
+
+            return ResponseEntity.noContent().build();
+
+        } else {
+
+            return ResponseEntity.notFound().build();
+
+        }
+
+    }
+
+}
+
+
+
+Albumservice.java
+
+---------------
+
+package com.Music.Service;
+
+
+
+import java.util.List;
+
+import java.util.Optional;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Service;
+
+
+
+import com.Music.Entity.Album;
+
+import com.Music.Repository.AlbumRepository;
+
+
+
+@Service
+
+public class AlbumService {
+
+
+
+    @Autowired
+
+    private AlbumRepository albumRepository;
+
+
+
+    public List<Album> getAllAlbums() {
+
+        return albumRepository.findAll();
+
+    }
+
+
+
+    public Album getAlbumById(Long id) {
+
+        Optional<Album> album = albumRepository.findById(id);
+
+        return album.orElse(null);
+
+    }
+
+
+
+    public Album createAlbum(Album album) {
+
+                List<Album> albums = getAllAlbums();
+
+
+
+                if (albums.stream().anyMatch( p -> p.getTitle().equals(album.getTitle()) ))
+
+                {
+
+                                //Album Title Already exist, auto-genrated Album id
+
+                                long albu_id = albums.stream().filter(p -> p.getTitle().equals(album.getTitle() ))
+
+                                                                .mapToLong(Album :: getAlbum_id)
+
+                                                                .findFirst()
+
+                                                                .orElse(0);
+
+                                album.setAlbum_id(albu_id);
+
+                }
+
+                else {
+
+                                long new_albu_id= albums.stream().mapToLong(Album :: getAlbum_id)
+
+                                                                .max()
+
+                                                                .orElse(0);
+
+                                album.setAlbum_id(new_albu_id+1);
+
+
+
+                                if (new_albu_id==0) {
+
+                                                                album.setAlbum_id((long) 1);
+
+                                                }
+
+
+
+
+
+                                }
+
+
+
+        return albumRepository.save(album);
+
+    }
+
+
+
+    public Album updateAlbum(Long id, Album updatedAlbum) {
+
+        Optional<Album> existingAlbum = albumRepository.findById(id);
+
+        if (existingAlbum.isPresent()) {
+
+            updatedAlbum.setId(id);
+
+            return albumRepository.save(updatedAlbum);
+
+        } else {
+
+            return null;
+
+        }
+
+    }
+
+
+
+    public boolean deleteAlbum(Long id) {
+
+        Optional<Album> album = albumRepository.findById(id);
+
+        if (album.isPresent()) {
+
+            albumRepository.deleteById(id);
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
+    }
+
+}
+
+
+
+Playlistservice.java
+
+---------------------
+
+package com.Music.Service;
+
+
+
+import java.util.List;
+
+import java.util.Optional;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Service;
+
+
+
+import com.Music.Entity.Playlist;
+
+import com.Music.Repository.PlaylistRepository;
+
+
+
+@Service
+
+public class PlaylistService {
+
+//            private Song song;
+
+
+
+    @Autowired
+
+    private PlaylistRepository playlistRepository;
+
+
+
+    public List<Playlist> getAllPlaylists() {
+
+        return playlistRepository.findAll();
+
+    }
+
+
+
+    public Playlist getPlaylistById(Long id) {
+
+        Optional<Playlist> playlist = playlistRepository.findById(id);
+
+        return playlist.orElse(null);
+
+    }
+
+
+
+
+
+    //Create playlist , num_song logic automatic
+
+    public Playlist createPlaylist(Playlist playlist) {
+
+                List<Playlist> playlists = getAllPlaylists();
+
+                if (playlists.stream().anyMatch( p -> p.getArtist().equals(playlist.getArtist())))
+
+                {
+
+                //Artist already exists, auto-genrated num_songs
+
+                                                int maxNumSongs= playlists.stream().filter(p -> p.getArtist().equals(playlist.getArtist()))
+
+                                                                                .mapToInt(Playlist:: getNum_of_songs_of_Artist)
+
+                                                                                .max()
+
+                                                                                .orElse(0);
+
+                                                playlist.setNum_of_songs_of_Artist(maxNumSongs +1);
+
+
+
+                    //Artist already exists, auto-genrated playlist_id
+
+                                                long pl_id= playlists.stream().filter(p -> p.getArtist().equals(playlist.getArtist() ))
+
+                                                                                .mapToLong(Playlist:: getPlList_id)
+
+                                                                                .findFirst()
+
+                                                                                .orElse(0);
+
+                                                playlist.setPlList_id(pl_id);
+
+                                }
+
+                else
+
+                {
+
+                                                //New artist, set num_songs to 1
+
+                                playlist.setNum_of_songs_of_Artist(1);
+
+
+
+
+
+                                //New artist, playlist Id_to increment by 1
+
+                                long maxId= playlists.stream().mapToLong(Playlist :: getPlList_id)
+
+                                                                .max()
+
+                                                                .orElse(0);
+
+                                playlist.setPlList_id(maxId+1);
+
+
+
+                                //if there are no existing elements , set playlist id to 1
+
+                                if (maxId==0) {
+
+                                                                playlist.setPlList_id(1);
+
+                                                }
+
+                                }
+
+                //Save the playlist
+
+                return playlistRepository.save(playlist);
+
+
+    }
+
+
+
+
+
+
+
+                public Playlist updatePlaylist(Long id, Playlist updatedPlaylist) {
+
+        Optional<Playlist> existingPlaylist = playlistRepository.findById(id);
+
+        if (existingPlaylist.isPresent()) {
+
+            updatedPlaylist.setId(id);
+
+            return playlistRepository.save(updatedPlaylist);
+
+        } else {
+
+            return null;
+
+        }
+
+    }
+
+
+
+    public boolean deletePlaylist(Long id) {
+
+        Optional<Playlist> playlist = playlistRepository.findById(id);
+
+        if (playlist.isPresent()) {
+
+            playlistRepository.deleteById(id);
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
+    }
+
+}
+
+
+
+
+
+Songservice.java
+
+------------------
+
+
+
+package com.Music.Service;
+
+
+
+import java.util.List;
+
+import java.util.Optional;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Service;
+
+
+
+import com.Music.Entity.Song;
+
+import com.Music.Repository.SongRepository;
+
+
+
+@Service
+
+public class SongService {
+
+
+
+    @Autowired
+
+    private SongRepository songRepository;
+
+
+
+    public List<Song> getAllSongs() {
+
+        return songRepository.findAll();
+
+    }
+
+
+
+    public Song getSongById(Long id) {
+
+        Optional<Song> song = songRepository.findById(id);
+
+        return song.orElse(null);
+
+    }
+
+
+
+    public Song createSong(Song song) {
+
+        return songRepository.save(song);
+
+    }
+
+
+
+    public Song updateSong(Long id, Song updatedSong) {
+
+        Optional<Song> existingSong = songRepository.findById(id);
+
+        if (existingSong.isPresent()) {
+
+            updatedSong.setId(id);
+
+            return songRepository.save(updatedSong);
+
+        } else {
+
+            return null;
+
+        }
+
+    }
+
+
+
+    public boolean deleteSong(Long id) {
+
+        Optional<Song> song = songRepository.findById(id);
+
+        if (song.isPresent()) {
+
+            songRepository.deleteById(id);
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
+    }
+
+}
+
+
+
+
+
+
+END
+
+
+
+
